@@ -1,0 +1,229 @@
+/* ==========================================================
+   DESIGN TOKENS
+   Change a color/font here and it updates everywhere.
+   ========================================================== */
+:root {
+  --bg: #F7F6F2;         /* page background — warm paper */
+  --ink: #1C1E1B;        /* primary text — near-black, slight green undertone */
+  --muted: #6B6F68;      /* secondary text */
+  --accent: #3C5A52;     /* deep muted teal — links, dates, accents */
+  --line: #DDDCD3;       /* hairline dividers */
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- i18n: show/hide by data-lang on <html> ---------- */
+
+html[data-lang="en"] [data-i18n="ja"] { display: none; }
+html[data-lang="ja"] [data-i18n="en"] { display: none; }
+
+html[data-lang="ja"] body {
+  font-family: 'Noto Sans JP', var(--font-body);
+}
+html[data-lang="ja"] .name {
+  font-family: 'Noto Serif JP', var(--font-display);
+}
+
+/* ---------- language switch ---------- */
+
+.lang-switch {
+  position: absolute;
+  top: 32px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  padding: 4px 2px;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--muted);
+  cursor: pointer;
+  letter-spacing: 0.04em;
+}
+
+.lang-btn:hover {
+  color: var(--accent);
+}
+
+/* Only show the button for switching to the OTHER language;
+   hide the button matching the currently active language. */
+html[data-lang="en"] .lang-btn[data-lang-btn="en"] { display: none; }
+html[data-lang="ja"] .lang-btn[data-lang-btn="ja"] { display: none; }
+
+.page {
+  position: relative;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 88px 24px 96px;
+}
+
+/* ---------- shared text styles ---------- */
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin: 0 0 18px;
+  text-transform: uppercase;
+}
+
+.rule {
+  border: none;
+  border-top: 1px solid var(--line);
+  margin: 56px 0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.15s ease;
+}
+a:hover, a:focus-visible {
+  border-bottom-color: var(--accent);
+}
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---------- header ---------- */
+
+.name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(38px, 6vw, 52px);
+  line-height: 1.1;
+  margin: 0 0 56px;
+  letter-spacing: -0.01em;
+}
+
+.intro {
+  font-size: 18px;
+  line-height: 1.65;
+  max-width: 56ch;
+  margin: 0 0 18px;
+  color: var(--ink);
+}
+.intro:last-of-type { margin-bottom: 0; }
+
+.stats {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ---------- experience ---------- */
+
+.entry {
+  display: grid;
+  grid-template-columns: 148px 1fr;
+  gap: 4px 24px;
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+
+.entry:last-child { margin-bottom: 0; }
+
+.entry-date {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.entry-role {
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0;
+}
+
+.entry-company {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.entry-summary .entry-role.entry-desc {
+  font-weight: 400;
+  font-size: 14px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.nobreak {
+  white-space: nowrap;
+}
+
+/* ---------- photo ---------- */
+
+.photo-section {
+  display: flex;
+  justify-content: center;
+}
+
+.photo {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 6px;
+  filter: grayscale(100%) contrast(1.05);
+  display: block;
+}
+
+/* ---------- footer / contact ---------- */
+
+.footer {
+  text-align: left;
+}
+
+.contact-links {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  margin: 0;
+}
+
+.contact-links .sep {
+  color: var(--line);
+  margin: 0 10px;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 520px) {
+  .page { padding: 56px 20px 72px; }
+  .lang-switch { top: 20px; right: 16px; }
+  .entry {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .entry-date { color: var(--muted); }
+}
+
+/* ---------- reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  a { transition: none; }
+}
