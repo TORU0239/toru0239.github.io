@@ -117,6 +117,23 @@ a:focus-visible {
 
 /* ---------- header ---------- */
 
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 0 24px;
+}
+
+.name-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 56px;
+}
+.name-row .avatar { margin: 0; }
+.name-row .name { margin: 0; }
+
 .name {
   font-family: var(--font-display);
   font-weight: 600;
